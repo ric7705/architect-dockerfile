@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  haproxy:
+    image: haproxy:latest
+    ports:
+      - "8410:80"
+      - "8404:8404"  # HAProxy 統計頁面
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - api1
+      - api2
+      - api3
+
+  api1:
+    image: your-api-image:latest
+    environment:
+      - SERVER_ID=1
+
+  api2:
+    image: your-api-image:latest
+    environment:
+      - SERVER_ID=2
+
+  api3:
+    image: your-api-image:latest
+    environment:
+      - SERVER_ID=3
+
+networks:
+  default:
+    driver: bridge
