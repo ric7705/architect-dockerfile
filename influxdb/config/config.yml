@@ -1,0 +1,24 @@
+bolt-path: /var/lib/influxdb2/influxd.bolt
+engine-path: /var/lib/influxdb2/engine
+http-bind-address: ":8086"
+log-level: error
+reporting-disabled: true
+secret-store: bolt
+
+storage:
+  engine: "bolt"
+  wal-fsync-delay: "0s"
+  cache-max-memory-size: 1073741824
+  cache-snapshot-memory-size: 26214400
+  cache-snapshot-write-cold-duration: "10m"
+  compact-full-write-cold-duration: "4h"
+  max-concurrent-compactions: 0
+  compact-throughput: 48318382
+  compact-throughput-burst: 48318382
+
+query:
+  concurrency: 10
+  memory-bytes-quota-per-query: 0
+
+ui:
+  enabled: true

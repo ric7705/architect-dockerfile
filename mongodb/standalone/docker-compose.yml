@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - '27017:27017'
+    container_name: mymongo
+    restart: on-failure
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=test
+      - MONGO_INITDB_ROOT_PASSWORD=!@StrongTestPwd
+    volumes:
+      - ../../volume_space/mongodb:/data/db
+      - ./config/mongod.conf:/etc/mongo/mongod.conf:ro

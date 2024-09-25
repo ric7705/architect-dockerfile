@@ -1,32 +1,40 @@
-version: '3'
+version: '3.8'
 
 services:
   haproxy:
     image: haproxy:latest
+    container_name: haproxy
     ports:
       - "8410:80"
       - "8404:8404"  # HAProxy 統計頁面
     volumes:
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./config/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     depends_on:
       - api1
       - api2
       - api3
+    restart: always
 
   api1:
     image: your-api-image:latest
+    container_name: api1
     environment:
       - SERVER_ID=1
+    restart: always
 
   api2:
     image: your-api-image:latest
+    container_name: api2
     environment:
       - SERVER_ID=2
+    restart: always
 
   api3:
     image: your-api-image:latest
+    container_name: api3
     environment:
       - SERVER_ID=3
+    restart: always
 
 networks:
   default:

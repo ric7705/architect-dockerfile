@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  mongo1:
+    image: mongo:5
+    container_name: mongo1
+    command: ["mongod", "--config", "/etc/mongo/mongo1.conf"]
+    ports:
+      - 27017:27017
+    restart: always
+    volumes:
+      - ../../volume_space/mongodb/mongo1:/data/db
+      - ./config/mongo1.conf:/etc/mongo/mongo1.conf:ro
+    networks:
+      - mongo-network
+
+  mongo2:
+    image: mongo:5
+    container_name: mongo2
+    command: ["mongod", "--config", "/etc/mongo/mongo2.conf"]
+    ports:
+      - 27018:27018
+    restart: always
+    volumes:
+      - ../../volume_space/mongodb/mongo2:/data/db
+      - ./config/mongo2.conf:/etc/mongo/mongo2.conf:ro
+    networks:
+      - mongo-network
+
+  mongo3:
+    image: mongo:5
+    container_name: mongo3
+    command: ["mongod", "--config", "/etc/mongo/mongo3.conf"]
+    ports:
+      - 27019:27019
+    restart: always
+    volumes:
+      - ../../volume_space/mongodb/mongo3:/data/db
+      - ./config/mongo3.conf:/etc/mongo/mongo3.conf:ro
+    networks:
+      - mongo-network
+
+  mongo-init:
+    image: mongo:5
+    container_name: mongo-init
+    restart: "no"
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+    command: >
+      mongosh --host mongo1:27017 --eval '
+        config = {
+          "_id" : "rs0",
+          "members" : [
+            {"_id" : 0, "host" : "mongo1:27017"},
+            {"_id" : 1, "host" : "mongo2:27018"},
+            {"_id" : 2, "host" : "mongo3:27019"}
+          ]
+        };
+        rs.initiate(config);
+      '
+    networks:
+      - mongo-network
+
+networks:
+  mongo-network:
+    driver: bridge
