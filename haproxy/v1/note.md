@@ -1,5 +1,5 @@
 該版本直接在dockert file指定APP image,
-等於綁死了, 如果要解耦必須使用service recovery技術
+等於綁死了, 如果要解耦必須使用service recovery
 
 
 配置上:

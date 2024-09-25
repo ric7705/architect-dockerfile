@@ -1,24 +1,19 @@
-version: '3.8'
+version: '3'
 
 services:
   gitlab:
     image: 'gitlab/gitlab-ce:latest'
-    container_name: gitlab
-    restart: unless-stopped
-    hostname: 'gitlab.localhost'
     environment:
-      GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://gitlab.localhost'
-        gitlab_rails['gitlab_shell_ssh_port'] = 1022
-    ports:
-      - '1080:80'
-      - '10443:443'
-      - '1022:22'
+      - GITLAB_ROOT_PASSWORD=${GITLAB_ROOT_PASSWORD}
+      - GITLAB_RUNNER_REGISTRATION_TOKEN=${GITLAB_RUNNER_REGISTRATION_TOKEN}
     volumes:
       - '../volume_space/gitlab/config:/etc/gitlab'
       - '../volume_space/gitlab/logs:/var/log/gitlab'
       - '../volume_space/gitlab/data:/var/opt/gitlab'
-    shm_size: '256m'
+    ports:
+      - "80:80"
+      - "443:443"
+      - "22:22"
 
 networks:
   default:
