@@ -9,9 +9,9 @@ services:
         external_url 'http://localhost'
         # Add any additional gitlab configurations here
     ports:
-      - '9080:80'
-      - '90443:443'
-      - '9022:22'
+      - '1080:80'
+      - '10443:443'
+      - '1022:22'
     volumes:
       - '$GITLAB_HOME/config:/etc/gitlab'
       - '$GITLAB_HOME/logs:/var/log/gitlab'
