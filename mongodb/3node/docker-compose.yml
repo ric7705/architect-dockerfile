@@ -10,7 +10,7 @@ services:
     restart: always
     volumes:
       - ../../volume_space/mongodb/mongo1:/data/db
-      - ./config/mongo1.conf:/etc/mongo/mongo1.conf:ro
+      - ./config/mongo1.conf:/etc/mongo/mongo1.conf
     networks:
       - mongo-network
 
@@ -23,7 +23,7 @@ services:
     restart: always
     volumes:
       - ../../volume_space/mongodb/mongo2:/data/db
-      - ./config/mongo2.conf:/etc/mongo/mongo2.conf:ro
+      - ./config/mongo2.conf:/etc/mongo/mongo2.conf
     networks:
       - mongo-network
 
@@ -36,7 +36,7 @@ services:
     restart: always
     volumes:
       - ../../volume_space/mongodb/mongo3:/data/db
-      - ./config/mongo3.conf:/etc/mongo/mongo3.conf:ro
+      - ./config/mongo3.conf:/etc/mongo/mongo3.conf
     networks:
       - mongo-network
 

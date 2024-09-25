@@ -11,4 +11,4 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=!@StrongTestPwd
     volumes:
       - ../../volume_space/mongodb:/data/db
-      - ./config/mongod.conf:/etc/mongo/mongod.conf:ro
+      - ./config/mongod.conf:/etc/mongo/mongod.conf

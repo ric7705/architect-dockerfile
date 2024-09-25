@@ -8,7 +8,7 @@ services:
       - "8086:8086"
     volumes:
       - ../volume_space/influxdb2:/var/lib/influxdb2
-      - ./config/config.yml:/etc/influxdb2/config.yml:ro
+      - ./config/config.yml:/etc/influxdb2/config.yml
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=${DOCKER_INFLUXDB_INIT_MODE}
       - DOCKER_INFLUXDB_INIT_USERNAME=${DOCKER_INFLUXDB_INIT_USERNAME}
