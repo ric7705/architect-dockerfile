@@ -1,1 +1,7 @@
 **/.env
+
+# Ignore everything in volume_space
+volume_space/*
+
+# But don't ignore volume_location.md
+!volume_space/volume_location.md
